@@ -1,0 +1,13 @@
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (14, 'Bocian', 26, 80);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (15, 'Puchacz', 30, 85);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (16, 'Junior', 35, 80);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (17, 'Pirat', 31.2, 83);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (18, 'Smyk', 33, 90);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (19, 'Cobra', 41, 96);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (20, 'Diana 2', 50, 110);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (21, 'Jantar 2B', 50, 87);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (22, 'Jantar Std.3', 39.5, 110);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (23, 'Swift', 30, 107);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (24, 'Perkoz', 42, 102);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (25, 'Astir', 38, 105);
+INSERT INTO gliders_db.calculator_glider (id, name, glide_ratio, best_glide_speed) VALUES (26, 'Discus', 42.2, 100);
