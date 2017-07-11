@@ -76,6 +76,10 @@ class Calculator(View):
 
 class BasicView(View):
     def get(self, request):
+        glider_list = Glider.objects.order_by("name")
+        airfield_list = Airdrome.objects.order_by("shortcut")
         ctx = {
+            "glider_list": glider_list,
+            "airfield_list": airfield_list
         }
         return render(request, 'calculator/base.html', ctx)

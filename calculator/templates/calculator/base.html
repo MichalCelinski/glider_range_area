@@ -18,19 +18,22 @@
                 &callback=initMap&sensor=false&v=3&libraries=geometry" async defer></script>
         </div>
         <div id="calculator" class="main">
-            <div id="airfield"> [forms wystawiany z calculator]
+            <div id="airfield">
                 <form id="airfield-form" class="select">
                     <select name="airfields" id="airfields">
-                        <option data-lat="52.0695704" data-lng="19.479607"> -- wybierz lotnisko -- </option>
-                        <option value="EPPC" data-lat="52.26916667" data-lng="20.90722222">EPBC</option>
-                        <option value="EPPK" data-lat="52.43388611" data-lng="17.04400278">EPPK</option>
-                        <option value="EPNL">EPNL</option>
-                        <option value="EPZP">EPZP</option>
+                        <option data-lat="52.0695704" data-lng="19.479607"> -- wybierz lotnisko --</option>
+                        {% block Airfields %}
+                            {% for airfield in airfield_list %}
+                                <option value="{{ airfield.shortcut }}" data-lat="{{ airfield.latitude }}"
+                                        data-lng="{{ airfield.longitude }}">
+                                    {{ airfield.shortcut }} - {{ airfield.name }}</option>
+                            {% endfor %}
+                        {% endblock %}
                     </select>
                 </form>
-                <div id="airfield-details">tu będą szczegóły wybranego lotniska (nazwa, skrót, współrzedne)</div>
+                <div id="airfield-details">Wybierz lotnisko <br>
+                </div>
             </div>
-            <div id="weather-details"> tu będzie METAR dla wybranego lotniska</div>
             <div id="flight-details">
                 <div id="glider-position">Pozycja szybowca: ?</div>
                 <div id="distance">Odległość od lotniska: ?</div>
@@ -38,15 +41,17 @@
             </div>
             <div id="glider">
                 <form id="glider-form" class="select">
-                    <select name="gliders">
-                        <option value> -- wybierz szybowiec -- </option>
-                        <option value="Bocian">Bocian</option>
-                        <option value="Puchacz">Puchacz</option>
-                        <option value="Perkaz">Perkoz</option>
-                        <option value="Junior">Junior</option>
+                    <select name="gliders" id="gliders">
+                        <option value> -- wybierz szybowiec --</option>
+                        {% block Gliders %}
+                            {% for glider in glider_list %}
+                             <option value="{{glider.pk}}" data-name="{{ glider.name }}" data-ratio="{{glider.glide_ratio}}"
+                                     data-speed="{{glider.best_glide_speed }}">{{glider.name}}</option>
+                            {% endfor %}
+                        {% endblock %}
                     </select>
                 </form>
-                <div id="glider-details">tu będą informacje o szybowcu - doskonałość, prędkość</div>
+                <div id="glider-details">Wybierz szybowiec</div>
             </div>
             <form id="safety-factor-form" class="select">
                 <select name="safety-factor">
@@ -56,18 +61,17 @@
                     <option value='1.4'> 40% </option>
                 </select>
             </form>
-            <div id="result"> tu będzie nasz WYNIK czyli
+            <form id="result" action="" method="post"> tu będzie nasz WYNIK czyli
                 wysokość w metrach potrzebna by dolecieć w panujących warunkach na danym szybowcu
-                [nasłuch na zmianę w local storage i ajax do calculator.API]
-            </div>
+                temp <input type="text" name="temp" id="temp" value=""><br>
+                <input type="submit" value="OBLICZ WYSOKOŚĆ">
+            </form>
+            <div id="weather-details"> tu będzie METAR dla wybranego lotniska</div>
         </div>
         <div style="clear:both;"></div>
     </section>
     <footer id="footer">
         nie do użytku operacyjnego
     </footer>
-
 </body>
-
-
 </html>
