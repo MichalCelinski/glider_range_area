@@ -72,3 +72,10 @@ class Calculator(View):
                             "prędkość optymalna: {} km/h<br>"
                             "wysokość potrzebna na dolot do krągu na 300m to {} m"
                             .format(glider.name, glider.glide_ratio, glider.best_glide_speed, expected_hight))
+
+
+class BasicView(View):
+    def get(self, request):
+        ctx = {
+        }
+        return render(request, 'calculator/base.html', ctx)

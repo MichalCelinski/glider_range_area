@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+    {% load staticfiles %}
+<head>
+    <mata charset="utf-8"/>
+    <title>Jak dolecę ;)</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'calculator/style.css' %}"/>
+    <script src="{% static 'calculator/scripts.js' %}"></script>
+</head>
+
+<body>
+    <header id="header"> Tu będzie nagłówek z instrukcją + link "o projekcie" i logowanie do strefy dodawania nowych
+        lotnisk i szyboli </header>
+    <section id="content">
+        <div id="map" class="main">
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcrYmDKRxvZQxmCP3Jts7Kup1CvvG1MOk
+                &callback=initMap&sensor=false&v=3&libraries=geometry" async defer></script>
+        </div>
+        <div id="calculator" class="main">
+            <div id="airfield"> [forms wystawiany z calculator]
+                <form id="airfield-form" class="select">
+                    <select name="airfields" id="airfields">
+                        <option value> -- wybierz lotnisko -- </option>
+                        <option value="{lat: 52.26916667, lng: 20.90722222}">EPBC</option>
+                        <option value="EPPK">EPPK</option>
+                        <option value="EPNL">EPNL</option>
+                        <option value="EPZP">EPZP</option>
+                    </select>
+                </form>
+                <div id="airfield-details">tu będą szczegóły wybranego lotniska (nazwa, skrót, współrzedne)</div>
+            </div>
+            <div id="weather-details"> tu będzie METAR dla wybranego lotniska</div>
+            <div id="flight-details">
+                <div id="glider-position">Pozycja szybowca: ?</div>
+                <div id="distance">Odległość od lotniska: ?</div>
+                <div id="heading">Kurs: ?</div>
+            </div>
+            <div id="glider">
+                <form id="glider-form" class="select">
+                    <select name="gliders">
+                        <option value> -- wybierz szybowiec -- </option>
+                        <option value="Bocian">Bocian</option>
+                        <option value="Puchacz">Puchacz</option>
+                        <option value="Perkaz">Perkoz</option>
+                        <option value="Junior">Junior</option>
+                    </select>
+                </form>
+                <div id="glider-details">tu będą informacje o szybowcu - doskonałość, prędkość</div>
+            </div>
+            <form id="safety-factor-form" class="select">
+                <select name="safety-factor">
+                    <option value> -- wybierz współczynnik bezpieczeństwa -- </option>
+                    <option value='1.2'> 20% </option>
+                    <option value='1.3'> 30% </option>
+                    <option value='1.4'> 40% </option>
+                </select>
+            </form>
+            <div id="result"> tu będzie nasz WYNIK czyli
+                wysokość w metrach potrzebna by dolecieć w panujących warunkach na danym szybowcu
+                [nasłuch na zmianę w local storage i ajax do calculator.API]
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </section>
+    <footer id="footer">
+        nie do użytku operacyjnego
+    </footer>
+
+</body>
+
+
+</html>
