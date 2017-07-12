@@ -51,11 +51,6 @@ body {
 	padding-top: 2vh;
 }
 
-#weather-details{
-	height: 8vh;
-	padding-top: 2vh;
-}
-
 #flight-details{
 	height: 8vh;
 	padding-top: 2vh;
@@ -76,13 +71,21 @@ body {
 }
 
 #safety-factor-form{
+	height: 6vh;
+	padding-top: 2vh;
+}
+
+#result_form{
+	height: 14vh;
+}
+
+#final{
 	height: 8vh;
 	padding-top: 2vh;
 }
 
 #result{
-	height: 18vh;
-	padding-top: 2vh;
+	font-size: 25px
 }
 
 select {

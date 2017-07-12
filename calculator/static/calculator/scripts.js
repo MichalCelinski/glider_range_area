@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
         airfield_details.innerHTML = "Lokalizacja " + this.options[this.selectedIndex].value + ":  N" +
             parseFloat(this.options[this.selectedIndex].dataset.lat).toFixed(2) + ", E " +
             parseFloat(this.options[this.selectedIndex].dataset.lng).toFixed(2);
+        var result = document.querySelector("#result");
+        result.innerHTML = "?";
     })
 });
 
@@ -65,6 +67,8 @@ function initMap(selected_airfield) {
             }
             var showPosition = document.querySelector("#glider-position");
             showPosition.innerHTML = "Pozycja szybowca: N " + location.lat().toFixed(2) + ", E " + location.lng().toFixed(2)
+            var result = document.querySelector("#result");
+            result.innerHTML = "?";
         }
     }
 
@@ -72,7 +76,7 @@ function initMap(selected_airfield) {
         var showDistance = document.querySelector("#distance");
         var distance = (google.maps.geometry.spherical.computeDistanceBetween(active_airfield, location) / 1000).toFixed(2);
         showDistance.innerHTML = "Odległość od lotniska: " + distance + " km";
-        localStorage.distance = distance
+        document.getElementById("id_distance").value = distance;
     }
 
     function headingBeetween(location) {
@@ -82,6 +86,7 @@ function initMap(selected_airfield) {
             heading += 360
         }
         showHeading.innerHTML = "Kurs: " + heading;
+        document.getElementById("id_glider_direction").value = heading;
     }
 
     function drawPolyline(location) {
@@ -104,11 +109,65 @@ function initMap(selected_airfield) {
 document.addEventListener("DOMContentLoaded", function () {
     var gliders = document.querySelector("#gliders");
     gliders.addEventListener('change', function (event) {
-
         var glider_details = document.querySelector("#glider-details");
         glider_details.innerHTML = "Wybrany szybowiec: " + this.options[this.selectedIndex].dataset.name +
             "<br> Doskonałość: " + this.options[this.selectedIndex].dataset.ratio +
             "<br> Prędkość Optymalna: " + this.options[this.selectedIndex].dataset.speed + " km/h";
-        document.getElementById("temp").value = this.options[this.selectedIndex].dataset.ratio
+        document.getElementById("id_glider").value = this.options[this.selectedIndex].value;
+        var result = document.querySelector("#result");
+        result.innerHTML = "?";
+    })
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    var safety_factor = document.querySelector("#safety-factor");
+    safety_factor.addEventListener('change', function (event) {
+        document.getElementById("id_reserve_level").value = this.options[this.selectedIndex].value;
+        var result = document.querySelector("#result");
+        result.innerHTML = "?";
+    })
+});
+
+$( document ).ready(function() {
+    $("#result_form").on('submit', (function (event) {
+        var csrftoken = $('csrfmiddlewaretoken').val();
+        var glider = $('#id_glider').val();
+        var distance = $('#id_distance').val();
+        var glider_direction = $('#id_glider_direction').val();
+        var wind_speed = $('#id_wind_speed').val();
+        var wind_direction = $('#id_wind_direction').val();
+        var reserve_level = $('#id_reserve_level').val();
+
+        $.ajax({
+            url: window.location.href,
+            type: "POST",
+            data: {
+                csrfmiddlewaretoken: csrftoken,
+                glider: glider,
+                distance: distance,
+                glider_direction: glider_direction,
+                wind_speed: wind_speed,
+                wind_direction: wind_direction,
+                reserve_level: reserve_level
+            },
+            success: function (json) {
+                var result = document.querySelector("#result");
+                result.innerHTML = (json['result'] + " m");
+            },
+            error: function (xhr, errmsg, err) {
+                console.log(xhr.status + ": " + xhr.responseText);
+            }
+        });
+        return false;
+    }));
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    var form = document.querySelector("#result_form");
+    form.addEventListener('change', function (event) {
+        var result = document.querySelector("#result");
+        result.innerHTML = "?";
     })
 });
