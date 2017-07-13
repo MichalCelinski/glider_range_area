@@ -8,12 +8,14 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{% static 'calculator/style.css' %}"/>
     <script src="{% static 'calculator/scripts.js' %}"></script>
-
 </head>
 
 <body>
-    <header id="header"> Tu będzie nagłówek z instrukcją + link "o projekcie" i logowanie do strefy dodawania nowych
-        lotnisk i szyboli </header>
+    <header id="header">
+        <div id="logo">JAK DOLECĘ - oblicz wysokość potrzebną by doszybować do lotniska</div>
+        <div id="login"> * </div>
+        <div style="clear:both;"></div>
+    </header>
     <section id="content">
         <div id="map" class="main">
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcrYmDKRxvZQxmCP3Jts7Kup1CvvG1MOk&callback=initMap&sensor=false&v=3&libraries=geometry" async defer></script>
@@ -22,7 +24,7 @@
             <div id="airfield">
                 <form id="airfield-form" class="select">
                     <select name="airfields" id="airfields">
-                        <option data-lat="52.0695704" data-lng="19.479607"> -- wybierz lotnisko --</option>
+                        <option value="" data-lat="52.0695704" data-lng="19.479607"> -- wybierz lotnisko --</option>
                         {% block Airfields %}
                             {% for airfield in airfield_list %}
                                 <option value="{{ airfield.shortcut }}" data-id="{{ airfield.pk }}" data-lat="{{ airfield.latitude }}"
@@ -43,7 +45,7 @@
             <div id="glider">
                 <form id="glider-form" class="select">
                     <select name="gliders" id="gliders">
-                        <option value> -- wybierz szybowiec --</option>
+                        <option value="" data-name="?" data-ratio="?" data-speed="?" > -- wybierz szybowiec --</option>
                         {% block Gliders %}
                             {% for glider in glider_list %}
                              <option value="{{glider.pk}}" data-name="{{ glider.name }}" data-ratio="{{glider.glide_ratio}}"
@@ -66,7 +68,7 @@
                 {% block content %}
                     <form action="" method="POST" id="result_form">{% csrf_token %}
                         {{ result_form.as_p }}
-                        <input type="submit" value="OBLICZ WYSOKOŚĆ">
+                        <input type="submit" id="btn" value="OBLICZ WYSOKOŚĆ">
                     </form>
                 {% endblock %}
             </div>
@@ -79,7 +81,8 @@
         <div style="clear:both;"></div>
     </section>
     <footer id="footer">
-        nie do użytku operacyjnego
+        UWAGA!  nie do użytku operacyjnego! <br>
+        dane pogodowe pochodzą z serwisu openweathermap.org
     </footer>
 </body>
 </html>

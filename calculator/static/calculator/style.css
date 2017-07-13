@@ -17,6 +17,19 @@ body {
 	padding-top: 2vh;
 }
 
+#logo {
+	font-size: 30px;
+	width: 60%;
+	float: left;
+}
+
+#login {
+	text-align: right;
+	font-size: 20px;
+	width: 40%;
+	float: left;
+}
+
 #map {
 	width: 59.9%;
 	height: 85vh;
@@ -76,7 +89,7 @@ body {
 }
 
 #result_form{
-	height: 2vh;
+	height: 4vh;
 	padding: 2vh;
 }
 
@@ -115,4 +128,18 @@ select {
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 1vh;
+}
+
+
+#btn {
+  color: #ecf0f1;
+  font-size: 20px;
+  background: #2c3e50;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+#btn:hover {
+  background: #e74c3c;
+  text-decoration: none;
 }

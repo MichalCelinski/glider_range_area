@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
             parseFloat(this.options[this.selectedIndex].dataset.lng).toFixed(2);
         var result = document.querySelector("#result");
         result.innerHTML = "?";
-        document.getElementById("id_distance").value = -1;
-        document.getElementById("id_glider_direction").value = -1;
+        document.getElementById("id_distance").value = "";
+        document.getElementById("id_glider_direction").value = "";
         document.getElementById("id_airfield_id").value = this.options[this.selectedIndex].dataset.id;
         document.getElementById("weather_details").innerHTML = "";
     })
