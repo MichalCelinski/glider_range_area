@@ -76,11 +76,17 @@ body {
 }
 
 #result_form{
-	height: 14vh;
+	height: 2vh;
+	padding: 2vh;
+}
+
+#weather_details{
+	height: 6vh;
+	padding-top: 2vh;
 }
 
 #final{
-	height: 8vh;
+	height: 16vh;
 	padding-top: 2vh;
 }
 

@@ -74,17 +74,8 @@ WSGI_APPLICATION = 'gliderangearea.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'mysql.connector.django',
-        'NAME': 'gliders_db',
-        'USER': 'root',
-        'PASSWORD': 'coderslab',
-        'OPTIONS': {
-            'autocommit': True,
-        },
-    }
-}
+# DATABASES is imported form local_settigs.py because of security
+from .local_settings import DATABASES
 
 
 # Password validation
@@ -124,3 +115,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+

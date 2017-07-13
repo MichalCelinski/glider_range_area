@@ -12,8 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
             parseFloat(this.options[this.selectedIndex].dataset.lng).toFixed(2);
         var result = document.querySelector("#result");
         result.innerHTML = "?";
+        document.getElementById("id_distance").value = -1;
+        document.getElementById("id_glider_direction").value = -1;
+        document.getElementById("id_airfield_id").value = this.options[this.selectedIndex].dataset.id;
+        document.getElementById("weather_details").innerHTML = "";
     })
 });
+
 
 function initMap(selected_airfield) {
     var map;
@@ -135,8 +140,7 @@ $( document ).ready(function() {
         var glider = $('#id_glider').val();
         var distance = $('#id_distance').val();
         var glider_direction = $('#id_glider_direction').val();
-        var wind_speed = $('#id_wind_speed').val();
-        var wind_direction = $('#id_wind_direction').val();
+        var airfield_id = $('#id_airfield_id').val();
         var reserve_level = $('#id_reserve_level').val();
 
         $.ajax({
@@ -147,13 +151,14 @@ $( document ).ready(function() {
                 glider: glider,
                 distance: distance,
                 glider_direction: glider_direction,
-                wind_speed: wind_speed,
-                wind_direction: wind_direction,
+                airfield_id: airfield_id,
                 reserve_level: reserve_level
             },
             success: function (json) {
                 var result = document.querySelector("#result");
                 result.innerHTML = (json['result'] + " m");
+                document.querySelector("#weather_details").innerHTML = ("Aktualny wiatr: " + json['wind_speed'] +
+                " km/h z kierunku " + json["wind_direction"])
             },
             error: function (xhr, errmsg, err) {
                 console.log(xhr.status + ": " + xhr.responseText);

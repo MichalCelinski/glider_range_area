@@ -25,7 +25,7 @@
                         <option data-lat="52.0695704" data-lng="19.479607"> -- wybierz lotnisko --</option>
                         {% block Airfields %}
                             {% for airfield in airfield_list %}
-                                <option value="{{ airfield.shortcut }}" data-lat="{{ airfield.latitude }}"
+                                <option value="{{ airfield.shortcut }}" data-id="{{ airfield.pk }}" data-lat="{{ airfield.latitude }}"
                                         data-lng="{{ airfield.longitude }}">
                                     {{ airfield.shortcut }} - {{ airfield.name }}</option>
                             {% endfor %}
@@ -71,6 +71,7 @@
                 {% endblock %}
             </div>
             <div id="final">
+                <div id="weather_details"></div>
                 <div>wysokość potrzebna by dolecieć w panujących warunkach na danym szybowcu to:</div>
                 <div id="result"> ? </div>
             </div>
