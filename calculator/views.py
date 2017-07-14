@@ -4,6 +4,7 @@ from calculator import services
 from calculator.forms import ResultForm
 from calculator.models import Airdrome, Glider
 from django.http import JsonResponse
+from gliderangearea.local_settings import GOOGLEMAPS_API_KEY
 
 
 class MainPageView(View):
@@ -14,7 +15,8 @@ class MainPageView(View):
         ctx = {
             "glider_list": glider_list,
             "airfield_list": airfield_list,
-            "result_form": result_form
+            "result_form": result_form,
+            "googlemaps_api_key": GOOGLEMAPS_API_KEY
         }
         return render(request, 'calculator/base.html', ctx)
 
