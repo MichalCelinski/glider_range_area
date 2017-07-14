@@ -21,7 +21,7 @@
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcrYmDKRxvZQxmCP3Jts7Kup1CvvG1MOk&callback=initMap&sensor=false&v=3&libraries=geometry" async defer></script>
         </div>
         <div id="calculator" class="main">
-            <div id="airfield">
+            <div id="airfield"> KROK 1 - wybierz lotnisko
                 <form id="airfield-form" class="select">
                     <select name="airfields" id="airfields">
                         <option value="" data-lat="52.0695704" data-lng="19.479607"> -- wybierz lotnisko --</option>
@@ -34,15 +34,15 @@
                         {% endblock %}
                     </select>
                 </form>
-                <div id="airfield-details">Wybierz lotnisko <br>
+                <div id="airfield-details"><br>
                 </div>
             </div>
-            <div id="flight-details">
+            <div id="flight-details">KROK 2 - zaznacz na mapie pozycję szybowca
                 <div id="glider-position">Pozycja szybowca: ?</div>
                 <div id="distance">Odległość od lotniska: ?</div>
                 <div id="heading">Kurs: ?</div>
             </div>
-            <div id="glider">
+            <div id="glider"> KROK 3 - wybierz typ szybowca
                 <form id="glider-form" class="select">
                     <select name="gliders" id="gliders">
                         <option value="" data-name="?" data-ratio="?" data-speed="?" > -- wybierz szybowiec --</option>
@@ -54,9 +54,9 @@
                         {% endblock %}
                     </select>
                 </form>
-                <div id="glider-details">Wybierz szybowiec</div>
+                <div id="glider-details">Wybrany szybowiec: ?<br>Doskonałość: ?<br>Prędkość Optymalna: ?</div>
             </div>
-            <form id="safety-factor-form" class="select">
+            <form id="safety-factor-form" class="select">KROK 3 - określ współczynnik bezpieczeństwa<br><br>
                 <select name="safety-factor" id="safety-factor">
                     <option value> -- wybierz współczynnik bezpieczeństwa -- </option>
                     <option value='1.2'> 20% </option>

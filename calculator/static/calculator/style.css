@@ -51,22 +51,23 @@ body {
 }
 
 #airfield{
-	height: 18vh;
+	height: 14vh;
+	padding-top: 2vh;
 }
 
 #airfield-details{
-	height: 7vh;
+	height: 4vh;
 	padding-top: 2vh;
 }
 
 #airfield-form{
-	height: 7vh;
+	height: 4vh;
 	padding-top: 2vh;
 }
 
 #flight-details{
-	height: 8vh;
-	padding-top: 2vh;
+	height: 10vh;
+	padding: 2vh;
 }
 
 #glider{
@@ -79,12 +80,12 @@ body {
 }
 
 #glider-form{
-	height: 7vh;
+	height: 4vh;
 	padding-top: 2vh;
 }
 
 #safety-factor-form{
-	height: 6vh;
+	height: 8vh;
 	padding-top: 2vh;
 }
 

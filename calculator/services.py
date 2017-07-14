@@ -8,11 +8,12 @@ def get_weather(lat, lon):
     params = {'lat': lat, 'lon': lon, 'APPID': APPID}
     r = requests.get("http://api.openweathermap.org/data/2.5/weather", params=params)
     weather = r.json()
-    weather_details = {'weather': weather['wind']}
-    return weather_details
+    wind_details = {'weather': weather['wind']}
+    return wind_details
 
 
-def calculate_height(glider_id, distance, glider_direction, reserve_level, wind_direction_meteorological, wind_speed):
+def calculate_height(glider_id, distance, glider_direction, safety_factor, wind_direction_meteorological, wind_speed):
+
     #  zamieniam meteorologiczny kierunek wiatru na nawigacyjny
     if wind_direction_meteorological >= 180:
         wind_direction = wind_direction_meteorological - 180
@@ -24,9 +25,10 @@ def calculate_height(glider_id, distance, glider_direction, reserve_level, wind_
 
     glider = Glider.objects.get(pk=glider_id)
 
-    #  obliczam w metrach wysokość potrzebną aby wejść w krąg nadlotniskowy
-    expected_height = round((1000 * (reserve_level * ((distance * glider.best_glide_speed) /
-                                                      ((glider.best_glide_speed + wind_component)
-                                                       * glider.glide_ratio))) + 300))
+    #  obliczam wysokość potrzebną aby dolecieć do lotniska
+    suggested_height = (distance * glider.best_glide_speed) / ((glider.best_glide_speed + wind_component)
+                                                              * glider.glide_ratio)
+    # zamieniam km na mery, dodaję wysokość kręgu lotniskowego (300m) i modyfikuję wynik o współczynnik bezpieczeństwa
+    suggested_height = round(safety_factor * (suggested_height * 1000) + 300)
 
-    return expected_height
+    return suggested_height
