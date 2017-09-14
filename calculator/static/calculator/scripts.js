@@ -1,6 +1,3 @@
-// nasłuchiwanie wyboru lotniska. Zmiana steruje widokiem mapy i warunkuje wyniki operacji na niej,
-// resetuje też wynik końcowy i czyści pola formularza
-
 document.addEventListener("DOMContentLoaded", function () {
     var airfields = document.querySelector("#airfields");
     airfields.addEventListener('change', function (event) {
@@ -21,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// inicjalizacja mapy
 function initMap(selected_airfield) {
     var map;
     var start_position = {lat: 52.0695704, lng: 19.479607};
@@ -33,7 +29,6 @@ function initMap(selected_airfield) {
     document.querySelector("#distance").innerHTML = "Odległość od lotniska: ?";
     document.querySelector("#heading").innerHTML = "Kurs: ?";
 
-    // centrowanie mapy i ustawienie markera lotniska
     if (selected_airfield == null || JSON.stringify(selected_airfield) == JSON.stringify(start_position)){
         map = new google.maps.Map(document.getElementById('map'), {
             center: start_position,
@@ -53,7 +48,6 @@ function initMap(selected_airfield) {
         active_airfield = airfield_marker.getPosition()
     }
 
-    // nasłuch na kliknięcia na mapie i wywołanie funkcji uwzględniających zmiany
     google.maps.event.addListener(map, 'click', function (event) {
         placeMarker(event.latLng);
         distanceCounter(event.latLng);
@@ -61,7 +55,6 @@ function initMap(selected_airfield) {
         drawPolyline(event.latLng);
     });
 
-    // sterowanie markerem pozycji szybowca
     function placeMarker(location) {
         if (airfield_marker != null) {
             if (glider_marker == null) {
@@ -78,14 +71,12 @@ function initMap(selected_airfield) {
         }
     }
 
-    // obliczanie odległości między markerami
     function distanceCounter(location) {
         var distance = (google.maps.geometry.spherical.computeDistanceBetween(active_airfield, location) / 1000).toFixed(2);
         document.querySelector("#distance").innerHTML = "Odległość od lotniska: " + distance + " km";
         document.getElementById("id_distance").value = distance;
     }
 
-    // obliczanie kursu szybowca
     function headingBeetween(location) {
         var heading = parseInt(google.maps.geometry.spherical.computeHeading(location, active_airfield));
         if (heading < 0) {
@@ -95,7 +86,6 @@ function initMap(selected_airfield) {
         document.getElementById("id_glider_direction").value = heading;
     }
 
-    // rysowanie linii łączącej markery
     function drawPolyline(location) {
         if (polyline != null) {
             polyline.setMap(null)
@@ -112,7 +102,6 @@ function initMap(selected_airfield) {
     }
 }
 
-//nasłuch na wybór szybowca. Wypisuje detale szybowca, przekazuje do formularza i resetuje wynik końcowy
 document.addEventListener("DOMContentLoaded", function () {
     var gliders = document.querySelector("#gliders");
     gliders.addEventListener('change', function (event) {
@@ -125,7 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 });
 
-//nasłuch na wybór współczynnika. Wypisuje detale szybowca, przekazuje do formularza i resetuje wynik końcowy
 document.addEventListener("DOMContentLoaded", function () {
     var safety_factor = document.querySelector("#safety-factor");
     safety_factor.addEventListener('change', function (event) {
@@ -134,10 +122,10 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 });
 
-// ajax obługujący ukryty formularz (pobranie wyników obliczeń z backendu)
 $( document ).ready(function() {
     $("#result_form").on('submit', (function (event) {
         var csrftoken = $('csrfmiddlewaretoken').val();
+        console.log(csrftoken);
         var glider = $('#id_glider').val();
         var distance = $('#id_distance').val();
         var glider_direction = $('#id_glider_direction').val();

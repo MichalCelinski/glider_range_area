@@ -30,10 +30,8 @@ class MainPageView(View):
 
             selected_airfield = Airdrome.objects.get(pk=airfield_id)
 
-            # pobieram pogodę dla lotniska
             airfield_weather = services.get_weather(selected_airfield.latitude, selected_airfield.longitude)
 
-            # rozpakowuję dane pobrane po api, sprawdzam czy jest komplet, przeliczam wiatr z m/s na km/h
             if len(airfield_weather['weather']) is 2:
                 wind_direction_meteorological = round(airfield_weather['weather']['deg'])
                 wind_speed = round(airfield_weather['weather']['speed'] * 3.6)
@@ -41,7 +39,6 @@ class MainPageView(View):
                 wind_direction_meteorological = 0
                 wind_speed = 0
 
-            # wywołuję funkcję obliczającą wskazaną wyskokość
             suggested_height = services.calculate_height(glider_id, distance, glider_direction, safety_factor,
                                                         wind_direction_meteorological, wind_speed)
 
